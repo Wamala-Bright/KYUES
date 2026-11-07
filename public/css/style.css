@@ -1072,3 +1072,32 @@ body {
   margin-bottom: 15px;
   display: block;
 }
+/* Project cards image layout */
+.content-card .project-image {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Keep project cards consistent */
+.content-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Keep descriptions aligned */
+.content-card p {
+  flex-grow: 1;
+}
+
+/* Responsive project images */
+@media (max-width: 768px) {
+  .content-card .project-image {
+    height: 180px;
+  }
+}
