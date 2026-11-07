@@ -1,0 +1,46 @@
+<%- include("partials/header") %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="hero-label">KYUES STUDENT COMMUNITY</span>
+    <h1>Membership</h1>
+    <p>Become an active member and enjoy the opportunities available through your engineering association.</p>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <h2>Why Join KYUES?</h2>
+    <p>Your membership connects you with students, opportunities and activities that support your engineering journey.</p>
+
+    <div class="card-grid">
+      <article class="content-card">
+        <div class="card-icon">🤝</div>
+        <h3>Networking</h3>
+        <p>Connect with engineering students and build valuable relationships.</p>
+      </article>
+
+      <article class="content-card">
+        <div class="card-icon">🎓</div>
+        <h3>Learning Opportunities</h3>
+        <p>Participate in workshops, mentorship and professional development activities.</p>
+      </article>
+
+      <article class="content-card">
+        <div class="card-icon">📅</div>
+        <h3>Events and Activities</h3>
+        <p>Stay informed about association events and student activities.</p>
+      </article>
+    </div>
+
+    <div class="membership-notice">
+      <h3>Your Association</h3>
+      <p>You are viewing membership information for <strong><%= association %></strong>.</p>
+      <p>Contact your association leadership for membership registration and requirements.</p>
+    </div>
+
+    <a href="/dashboard?association=<%= association %>" class="btn btn-primary">Back to Dashboard</a>
+  </div>
+</section>
+
+<%- include("partials/footer") %>
