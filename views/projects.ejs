@@ -20,65 +20,37 @@
 
   <div class="card-grid">
 
-    <!-- Environmental Projects -->
-    <article class="content-card">
-      <img
-        src="/images/environment.jpg"
-        alt="Students participating in environmental activities"
-        class="project-image"
-      >
-      <h3>Environmental Projects</h3>
-      <p>
-        Participate in environmental activities, conservation
-        campaigns and community clean-up initiatives.
-      </p>
-      <span class="card-tag">Environmental</span>
-    </article>
+    <% if (projects && projects.length > 0) { %>
 
-    <!-- Academic Mentorship -->
-    <article class="content-card">
-      <img
-        src="/images/education.jpg"
-        alt="Students learning and sharing academic knowledge"
-        class="project-image"
-      >
-      <h3>Academic Mentorship</h3>
-      <p>
-        Support fellow students through tutoring,
-        knowledge sharing and academic mentorship.
-      </p>
-      <span class="card-tag">Educational</span>
-    </article>
+      <% projects.forEach((project) => { %>
 
-    <!-- Community Outreach -->
-    <article class="content-card">
-      <img
-        src="/images/community_outreach.jfif"
-        alt="Students participating in community outreach"
-        class="project-image"
-      >
-      <h3>Community Outreach</h3>
-      <p>
-        Participate in outreach programmes that support
-        communities and encourage positive change.
-      </p>
-      <span class="card-tag">Community Service</span>
-    </article>
+        <article class="content-card">
 
-    <!-- Health and Wellness -->
-    <article class="content-card">
-      <img
-        src="/images/health.jfif"
-        alt="Students promoting health and wellness"
-        class="project-image"
-      >
-      <h3>Health and Wellness Campaigns</h3>
-      <p>
-        Promote healthy lifestyles, student wellbeing
-        and awareness through organised activities.
-      </p>
-      <span class="card-tag">Health and Wellness</span>
-    </article>
+          <img
+            src="/images/<%= project.image_filename %>"
+            alt="<%= project.title %>"
+            class="project-image"
+          >
+
+          <h3><%= project.title %></h3>
+
+          <p>
+            <%= project.description %>
+          </p>
+
+          <span class="card-tag">
+            <%= project.category_name %>
+          </span>
+
+        </article>
+
+      <% }) %>
+
+    <% } else { %>
+
+      <p>No projects are currently available.</p>
+
+    <% } %>
 
   </div>
 </section>
