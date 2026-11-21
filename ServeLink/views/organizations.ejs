@@ -1,0 +1,58 @@
+<%- include("partials/header") %>
+
+<section class="page-hero">
+  <span class="hero-label">OUR ENGINEERING COMMUNITY</span>
+  <h1>Engineering Organizations</h1>
+  <p>
+    Discover engineering associations and student groups
+    that create opportunities for learning, leadership and collaboration.
+  </p>
+</section>
+
+<section class="content-section">
+  <div class="section-heading">
+    <h2>Explore Organizations</h2>
+    <p>
+      Connect with fellow engineering students and become part
+      of a community that supports your academic and professional growth.
+    </p>
+  </div>
+
+  <div class="card-grid">
+
+    <% if (organizations && organizations.length > 0) { %>
+
+      <% organizations.forEach((organization) => { %>
+
+        <article class="content-card">
+
+          <img
+            src="/images/<%= organization.logo_filename %>"
+            alt="<%= organization.name %>"
+            class="organization-image"
+          >
+
+          <h3>
+            <a href="/organization/<%= organization.organization_id %>">
+              <%= organization.name %>
+            </a>
+          </h3>
+
+          <p><%= organization.description %></p>
+
+          <a href="/organization/<%= organization.organization_id %>">View organization →</a>
+
+        </article>
+
+      <% }) %>
+
+    <% } else { %>
+
+      <p>No organizations are currently available.</p>
+
+    <% } %>
+
+  </div>
+</section>
+
+<%- include("partials/footer") %>

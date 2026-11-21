@@ -1,0 +1,46 @@
+<%- include("partials/header") %>
+
+<section class="page-hero" aria-labelledby="categories-heading">
+  <span class="hero-label">EXPLORE OPPORTUNITIES</span>
+  <h1 id="categories-heading">Explore Categories</h1>
+  <p>
+    Discover different areas of service and find opportunities
+    to contribute your skills and make a positive difference.
+  </p>
+</section>
+
+<section class="content-section" aria-label="Available categories">
+
+  <div class="category-grid">
+
+    <% if (categories && categories.length > 0) { %>
+
+      <% categories.forEach((category) => { %>
+
+        <article class="category-card">
+
+          <img
+            src="/images/<%= category.image_filename %>"
+            alt="<%= category.name %> activities"
+            class="category-image"
+          >
+
+          <h2><a href="/category/<%= category.category_id %>"><%= category.name %></a></h2>
+
+          <p><%= category.description %></p>
+
+        </article>
+
+      <% }) %>
+
+    <% } else { %>
+
+      <p>No categories are currently available.</p>
+
+    <% } %>
+
+  </div>
+
+</section>
+
+<%- include("partials/footer") %>

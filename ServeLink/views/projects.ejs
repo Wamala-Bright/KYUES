@@ -1,0 +1,63 @@
+<%- include("partials/header") %>
+
+<section class="page-hero">
+  <span class="hero-label">ENGINEERING OPPORTUNITIES</span>
+  <h1>Upcoming Service Projects</h1>
+  <p>
+    Explore activities, practical experiences and community initiatives
+    where engineering students can apply their skills and make a difference.
+  </p>
+</section>
+
+<section class="content-section">
+  <div class="section-heading">
+    <h2>Next five projects</h2>
+    <p>
+      Develop your skills, work with others and contribute
+      to meaningful projects.
+    </p>
+  </div>
+
+  <div class="card-grid">
+
+    <% if (projects && projects.length > 0) { %>
+
+      <% projects.forEach((project) => { %>
+
+        <article class="content-card">
+
+          <img
+            src="/images/<%= project.image_filename %>"
+            alt="<%= project.title %>"
+            class="project-image"
+          >
+
+          <h3><a href="/project/<%= project.project_id %>"><%= project.title %></a></h3>
+
+          <p>
+            <%= project.description %>
+          </p>
+
+          <p>
+            Organization:
+            <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a>
+          </p>
+          <p>
+            Date: <%= new Date(project.date).toLocaleDateString('en-UG', { dateStyle: 'long' }) %>
+          </p>
+          <a class="card-tag" href="/category/<%= project.category_id %>"><%= project.category_name %></a>
+
+        </article>
+
+      <% }) %>
+
+    <% } else { %>
+
+      <p>No projects are currently available.</p>
+
+    <% } %>
+
+  </div>
+</section>
+
+<%- include("partials/footer") %>

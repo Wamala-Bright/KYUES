@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+
+<section class="page-hero" aria-labelledby="category-heading">
+  <span class="hero-label">SERVICE CATEGORY</span>
+  <h1 id="category-heading"><%= category.name %></h1>
+  <p><%= category.description %></p>
+</section>
+
+<section class="content-section" aria-labelledby="category-projects-heading">
+  <div class="section-heading">
+    <h2 id="category-projects-heading">Projects in this category</h2>
+  </div>
+
+  <% if (projects.length > 0) { %>
+    <div class="card-grid">
+      <% projects.forEach((project) => { %>
+        <article class="content-card">
+          <% if (project.image_filename) { %>
+            <img class="project-image" src="/images/<%= project.image_filename %>" alt="">
+          <% } %>
+          <h3><a href="/project/<%= project.project_id %>"><%= project.title %></a></h3>
+          <p><%= project.description %></p>
+          <p>
+            Organization:
+            <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a>
+          </p>
+          <p>Date: <%= new Date(project.date).toLocaleDateString('en-UG', { dateStyle: 'long' }) %></p>
+        </article>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p>No service projects are currently listed in this category.</p>
+  <% } %>
+
+  <p><a href="/categories">← All categories</a></p>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,63 @@
+<%- include("partials/header") %>
+
+<section class="dashboard-welcome">
+  <div>
+    <span class="hero-label">KYUES STUDENT PORTAL</span>
+    <h1>Welcome to KYUES</h1>
+    <p>Your engineering community. Your opportunities. Your future.</p>
+  </div>
+
+  <div class="association-badge">
+    <span>YOUR ASSOCIATION</span>
+    <h2><%= association %></h2>
+  </div>
+</section>
+
+<section class="dashboard-section">
+  <div class="section-heading">
+    <h2>Your Student Community</h2>
+    <p>Everything you need to stay connected and involved.</p>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <a href="/dashboard?association=<%= association %>" class="dashboard-card">
+      <span class="dashboard-icon">🏠</span>
+      <h3>Home</h3>
+      <p>Get the latest student announcements and updates.</p>
+    </a>
+
+    <a href="/shop?association=<%= association %>" class="dashboard-card">
+      <span class="dashboard-icon">🛒</span>
+      <h3>KYUES Shop</h3>
+      <p>Explore affordable PPE and engineering supplies.</p>
+    </a>
+
+    <a href="/events?association=<%= association %>" class="dashboard-card">
+      <span class="dashboard-icon">📅</span>
+      <h3>Events</h3>
+      <p>Discover upcoming activities, workshops and networking events.</p>
+    </a>
+
+    <a href="/family?association=<%= association %>" class="dashboard-card">
+      <span class="dashboard-icon">🤝</span>
+      <h3><%= association %> Family</h3>
+      <p>Connect with fellow association members.</p>
+    </a>
+
+    <a href="/membership?association=<%= association %>" class="dashboard-card">
+      <span class="dashboard-icon">🎓</span>
+      <h3>Membership</h3>
+      <p>Explore membership information and benefits.</p>
+    </a>
+
+    <a href="/questions?association=<%= association %>" class="dashboard-card">
+      <span class="dashboard-icon">💬</span>
+      <h3>Question Box</h3>
+      <p>Ask questions and get assistance from the community.</p>
+    </a>
+
+  </div>
+</section>
+
+<%- include("partials/footer") %>
