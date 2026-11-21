@@ -45,7 +45,13 @@
           <p>
             Date: <%= new Date(project.date).toLocaleDateString('en-UG', { dateStyle: 'long' }) %>
           </p>
-          <a class="card-tag" href="/category/<%= project.category_id %>"><%= project.category_name %></a>
+          <% if (project.categories && project.categories.length > 0) { %>
+            <div class="project-category-tags" aria-label="Project categories">
+              <% project.categories.forEach((category) => { %>
+                <a class="card-tag" href="/category/<%= category.category_id %>"><%= category.name %></a>
+              <% }) %>
+            </div>
+          <% } %>
 
         </article>
 

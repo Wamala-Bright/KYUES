@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS projects (
     project_id SERIAL PRIMARY KEY,
     organization_id INTEGER NOT NULL,
-    category_id INTEGER NOT NULL,
     title VARCHAR(200) NOT NULL,
     description TEXT NOT NULL,
     location VARCHAR(200) NOT NULL,
@@ -40,13 +39,16 @@ CREATE TABLE IF NOT EXISTS projects (
         REFERENCES organization(organization_id)
         ON DELETE RESTRICT,
 
-    CONSTRAINT fk_project_category
-        FOREIGN KEY (category_id)
-        REFERENCES categories(category_id)
-        ON DELETE RESTRICT,
 
     CONSTRAINT unique_organization_project
         UNIQUE (organization_id, title)
+);
+
+-- A project can be associated with multiple categories.
+CREATE TABLE IF NOT EXISTS project_categories (
+    project_id INTEGER NOT NULL REFERENCES projects(project_id) ON DELETE CASCADE,
+    category_id INTEGER NOT NULL REFERENCES categories(category_id) ON DELETE RESTRICT,
+    PRIMARY KEY (project_id, category_id)
 );
 
 
@@ -114,7 +116,6 @@ ON CONFLICT (name) DO NOTHING;
 
 INSERT INTO projects (
     organization_id,
-    category_id,
     title,
     description,
     location,
@@ -124,7 +125,6 @@ INSERT INTO projects (
 
 SELECT
     o.organization_id,
-    c.category_id,
     p.title,
     p.description,
     p.location,
@@ -172,6 +172,16 @@ FROM (
         'Kampala, Uganda',
         '2026-12-26',
         'health.jfif'
+    ),
+
+    (
+        'BrightFuture Builders',
+        'Educational',
+        'Engineering Skills Workshop',
+        'Take part in a practical workshop focused on engineering skills, teamwork and community problem-solving.',
+        'Kyambogo, Kampala, Uganda',
+        '2027-01-02',
+        'projects.jfif'
     )
 
 ) AS p(
@@ -187,10 +197,26 @@ FROM (
 INNER JOIN organization o
     ON o.name = p.organization_name
 
-INNER JOIN categories c
-    ON c.name = p.category_name
-
 ON CONFLICT (organization_id, title) DO NOTHING;
+
+-- Assign primary and secondary categories to each project.
+INSERT INTO project_categories (project_id, category_id)
+SELECT p.project_id, c.category_id
+FROM (VALUES
+    ('Environmental Projects', 'Environmental'),
+    ('Environmental Projects', 'Community Service'),
+    ('Academic Mentorship', 'Educational'),
+    ('Academic Mentorship', 'Community Service'),
+    ('Community Outreach', 'Community Service'),
+    ('Community Outreach', 'Environmental'),
+    ('Health and Wellness Campaigns', 'Health and Wellness'),
+    ('Health and Wellness Campaigns', 'Educational'),
+    ('Engineering Skills Workshop', 'Educational'),
+    ('Engineering Skills Workshop', 'Community Service')
+) AS mapping(project_title, category_name)
+JOIN projects p ON p.title = mapping.project_title
+JOIN categories c ON c.name = mapping.category_name
+ON CONFLICT (project_id, category_id) DO NOTHING;
 
 
 -- ============================================
@@ -208,7 +234,7 @@ SELECT
     c.name AS category,
     p.image_filename
 FROM projects p
-INNER JOIN organization o
-    ON p.organization_id = o.organization_id
-INNER JOIN categories c
-    ON p.category_id = c.category_id;
+INNER JOIN organization o ON p.organization_id = o.organization_id
+INNER JOIN project_categories pc ON pc.project_id = p.project_id
+INNER JOIN categories c ON c.category_id = pc.category_id
+ORDER BY p.project_id, c.name;
