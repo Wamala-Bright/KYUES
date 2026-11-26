@@ -1,0 +1,9 @@
+<%- include('partials/header') %>
+<section class="page-hero"><span class="hero-label">KYUES MANAGEMENT</span><h1><%= title %></h1><p>Enter accurate information and save your changes.</p></section>
+<section class="content-section"><div class="question-box organization-form"><form method="POST" action="<%= record.id ? `/manage/${type}/${record.id}/edit` : `/manage/${type}/new` %>">
+<div class="form-group"><label for="name"><%= type==='project'?'Project title':type==='category'?'Category name':'Organization name' %></label><input id="name" name="name" required minlength="3" maxlength="200" value="<%= record.name || '' %>"></div>
+<div class="form-group"><label for="description">Description</label><textarea id="description" name="description" required maxlength="500" rows="5"><%= record.description || '' %></textarea></div>
+<% if(type==='organization'){ %><div class="form-group"><label for="email">Contact email</label><input id="email" name="email" type="email" required value="<%= record.email || '' %>"></div><% } %>
+<% if(type==='project'){ %><div class="form-group"><label for="organization_id">Organization</label><select id="organization_id" name="organization_id" required><option value="">Choose an organization</option><% organizations.forEach(o=>{ %><option value="<%= o.id %>" <%= String(record.organization_id)===String(o.id)?'selected':'' %>><%= o.name %></option><% }) %></select></div><div class="form-group"><label for="location">Location</label><input id="location" name="location" required maxlength="200" value="<%= record.location || '' %>"></div><div class="form-group"><label for="date">Date</label><input id="date" name="date" type="date" required value="<%= record.date ? new Date(record.date).toISOString().slice(0,10) : '' %>"></div><% } %>
+<button class="primary-button" type="submit"><%= record.id?'Save Changes':'Create '+type %></button></form></div></section>
+<%- include('partials/footer') %>

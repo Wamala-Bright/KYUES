@@ -17,6 +17,7 @@ import {
   showCategoryDetailsPage
 } from './controllers/categories.js';
 import { testErrorPage, showNotFoundPage } from './controllers/errors.js';
+import { showCreate, showEdit, save, showAssign, saveAssign, managementValidation } from './controllers/management.js';
 import {
   showAssociationsPage,
   showLoginPage,
@@ -40,6 +41,12 @@ router.post('/new-organization', organizationValidation, processNewOrganizationF
 router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetailsPage);
 router.get('/categories', showCategoriesPage);
+router.get('/manage/:type/new', showCreate);
+router.get('/manage/:type/:id/edit', showEdit);
+router.post('/manage/:type/new', managementValidation, save);
+router.post('/manage/:type/:id/edit', managementValidation, save);
+router.get('/project/:id/categories', showAssign);
+router.post('/project/:id/categories', saveAssign);
 router.get('/category/:id', showCategoryDetailsPage);
 
 router.get('/associations', showAssociationsPage);

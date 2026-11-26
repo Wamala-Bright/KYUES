@@ -7,6 +7,7 @@
 </section>
 
 <section class="content-section" aria-label="Project details">
+  <p><a class="primary-button" href="/manage/project/<%= project.project_id %>/edit">Edit Project</a> <a class="primary-button" href="/project/<%= project.project_id %>/categories">Update Categories</a></p>
   <article class="content-card">
     <% if (project.image_filename) { %>
       <img class="project-image" src="/images/<%= project.image_filename %>" alt="">

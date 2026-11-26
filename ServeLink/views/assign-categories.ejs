@@ -1,0 +1,4 @@
+<%- include('partials/header') %>
+<section class="page-hero"><span class="hero-label">PROJECT SETTINGS</span><h1>Update Categories</h1><p>Choose all categories that apply to <%= project.name %>.</p></section>
+<section class="content-section"><div class="question-box"><form method="POST" action="/project/<%= project.id %>/categories"><fieldset><legend>Available categories</legend><% categories.forEach(c=>{ %><label class="form-group" style="display:block"><input type="checkbox" name="category_ids" value="<%= c.id %>" <%= selected.includes(c.id)?'checked':'' %>> <%= c.name %></label><% }) %></fieldset><button class="primary-button" type="submit">Save Categories</button></form></div></section>
+<%- include('partials/footer') %>
