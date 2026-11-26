@@ -1,10 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
+import session from 'express-session';
 import { fileURLToPath } from 'url';
 
 import router from './src/routes.js';
 import { testConnection } from './src/models/db.js';
+import flashMiddleware from './src/middleware/flash.js';
 
 dotenv.config();
 
@@ -14,6 +16,10 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+if (NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -35,6 +41,21 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Session middleware must run before the flash middleware.
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'development-only-change-this-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 1000
+  }
+}));
+
+app.use(flashMiddleware);
 app.use(router);
 
 // Express identifies error middleware by its four-argument signature.

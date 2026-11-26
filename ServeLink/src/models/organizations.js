@@ -18,4 +18,13 @@ const getOrganizationDetails = async (organizationId) => {
   return rows[0] ?? null;
 };
 
-export { getAllOrganizations, getOrganizationDetails };
+const createOrganization = async ({ name, description, contactEmail, logoFilename }) => {
+  const { rows } = await db.query(`
+    INSERT INTO organization (name, description, contact_email, logo_filename)
+    VALUES ($1, $2, $3, $4)
+    RETURNING organization_id, name, description, contact_email, logo_filename
+  `, [name, description, contactEmail, logoFilename]);
+  return rows[0];
+};
+
+export { getAllOrganizations, getOrganizationDetails, createOrganization };

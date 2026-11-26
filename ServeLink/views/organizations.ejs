@@ -18,7 +18,7 @@
     </p>
   </div>
 
-  <div class="card-grid">
+  <p class="organization-add-link"><a class="primary-button" href="/new-organization">Add an Organization</a></p>\n\n  <div class="card-grid">
 
     <% if (organizations && organizations.length > 0) { %>
 
@@ -28,17 +28,17 @@
 
           <img
             src="/images/<%= organization.logo_filename %>"
-            alt="<%= organization.name %>"
+            alt="<%- organization.name %>"
             class="organization-image"
           >
 
           <h3>
             <a href="/organization/<%= organization.organization_id %>">
-              <%= organization.name %>
+              <%- organization.name %>
             </a>
           </h3>
 
-          <p><%= organization.description %></p>
+          <p><%- organization.description %></p>
 
           <a href="/organization/<%= organization.organization_id %>">View organization →</a>
 

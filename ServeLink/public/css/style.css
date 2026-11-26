@@ -1109,3 +1109,61 @@ body {
     height: 180px;
   }
 }
+
+/* Form validation and session flash messages */
+.organization-form {
+  max-width: 760px;
+}
+.organization-form .form-group {
+  margin-bottom: 20px;
+}
+.organization-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.organization-form input,
+.organization-form textarea {
+  display: block;
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #d5ded8;
+  border-radius: 8px;
+  font: inherit;
+}
+.organization-form input:focus,
+.organization-form textarea:focus {
+  outline: 2px solid var(--primary);
+  border-color: var(--primary);
+}
+.organization-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+.organization-form button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+.flash-container {
+  max-width: 1100px;
+  margin: 20px auto 0;
+  padding: 0 20px;
+}
+.flash-message {
+  padding: 13px 17px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.flash-error {
+  color: #842029;
+  background: #f8d7da;
+  border: 1px solid #f5c2c7;
+}
+.flash-success {
+  color: #0f5132;
+  background: #d1e7dd;
+  border: 1px solid #badbcc;
+}
+\n.organization-add-link { margin: 0 0 25px; text-align: right; }\n

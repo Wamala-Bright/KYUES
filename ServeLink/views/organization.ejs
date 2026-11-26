@@ -2,14 +2,14 @@
 
 <section class="page-hero" aria-labelledby="organization-heading">
   <span class="hero-label">OUR ENGINEERING COMMUNITY</span>
-  <h1 id="organization-heading"><%= organization.name %></h1>
-  <p><%= organization.description %></p>
+  <h1 id="organization-heading"><%- organization.name %></h1>
+  <p><%- organization.description %></p>
 </section>
 
 <section class="content-section" aria-labelledby="organization-projects-heading">
   <div class="section-heading">
     <h2 id="organization-projects-heading">Projects from this organization</h2>
-    <p>Explore the service opportunities supported by <%= organization.name %>.</p>
+    <p>Explore the service opportunities supported by <%- organization.name %>.</p>
   </div>
 
   <% if (projects.length > 0) { %>
